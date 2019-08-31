@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_24_170626) do
+ActiveRecord::Schema.define(version: 2019_08_31_113831) do
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "user_id"
+    t.decimal "total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
 
   create_table "products", force: :cascade do |t|
     t.string "title", default: ""
