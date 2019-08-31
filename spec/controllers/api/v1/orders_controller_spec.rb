@@ -32,4 +32,23 @@ describe Api::V1::OrdersController, type: :controller do
 
     it { should respond_with 200 }
   end
+
+  describe 'POST #create' do
+    before(:each) do
+      current_user = FactoryBot.create :user
+      api_authorization_header current_user.auth_token
+
+      product1 = FactoryBot.create :product
+      product2 = FactoryBot.create :product
+      order_params = { product_ids: [product1.id, product2.id] }
+      post :create, params: { user_id: current_user.id, order: order_params }
+    end
+
+    it 'returns the record user ordered' do
+      order_response = json_response[:order]
+      expect(order_response[:id]).to be_present
+    end
+
+    it { should respond_with 201 }
+  end
 end
