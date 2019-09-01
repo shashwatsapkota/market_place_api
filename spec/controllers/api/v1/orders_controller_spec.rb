@@ -51,7 +51,7 @@ describe Api::V1::OrdersController, type: :controller do
 
       product1 = FactoryBot.create :product
       product2 = FactoryBot.create :product
-      order_params = { product_ids: [product1.id, product2.id] }
+      order_params = { product_ids_and_quantities: [[product1.id, 2], [product2.id, 3]] }
       post :create, params: { user_id: current_user.id, order: order_params }
     end
 
