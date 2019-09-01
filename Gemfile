@@ -53,6 +53,7 @@ group :development do
 end
 
 group :test do
+  gem 'email_spec'
   gem 'rspec-rails', '~> 3.8'
   gem 'shoulda-matchers'
 end
