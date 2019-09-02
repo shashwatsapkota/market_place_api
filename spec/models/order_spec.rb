@@ -20,11 +20,18 @@ describe Order, type: :model do
       product1 = FactoryBot.create :product, price: 50
       product2 = FactoryBot.create :product, price: 80
 
-      @order = FactoryBot.build :order, product_ids: [product1.id, product2.id]
+      @order = FactoryBot.build :order
+      # , product_ids: [product1.id, product2.id]
+
+      placement1 = FactoryBot.create :placement, product: product1, quantity: 3, order: @order
+      placement2 = FactoryBot.create :placement, product: product2, quantity: 15, order: @order
+
+      @order.placements << placement1
+      @order.placements << placement2
     end
 
     it 'returns the total amount to pay for the products' do
-      expect { @order.set_total! }.to change{ @order.total }.from(0).to(130)
+      expect { @order.set_total! }.to change{ @order.total }.from(0).to(1350)
     end
   end
 
