@@ -38,6 +38,8 @@ describe Api::V1::ProductsController, type: :controller do
       end
     end
 
+    it_behaves_like 'paginated_list'
+
     context 'when product_ids parameter is sent' do
       before(:each) do
         @user = FactoryBot.create :user
